@@ -1,26 +1,26 @@
 package models
 
 import (
-	"github.com/jinzhu/gorm"
 	"fmt"
+
+	"github.com/jinzhu/gorm"
 )
 
 type Loan struct {
-
-	LoanNumber string `json:"loan_number"`
-	KtpNumber string `json:"ktp_number"`
-	DebiturName string `json:"debitur_name"`
-	PhoneNumber string `json:"phone_number"`
-	ProductCode string `json:"product_code"`
-	Arrears float32 `json:"arrears"`
-	Tenor uint32 `json:"tenor"`
-	Interest float32 `json:"interest"`
+	LoanNumber  string  `json:"loan_number"`
+	KtpNumber   string  `json:"ktp_number"`
+	DebiturName string  `json:"debitur_name"`
+	PhoneNumber string  `json:"phone_number"`
+	ProductCode string  `json:"product_code"`
+	Arrears     float32 `json:"arrears"`
+	Tenor       uint32  `json:"tenor"`
+	Interest    float32 `json:"interest"`
 	gorm.Model
 }
 
 func (con *Loan) Validate() (map[string]interface{}, bool) {
 
-	resp := make(map[string] interface{})
+	resp := make(map[string]interface{})
 
 	if con.LoanNumber == "" {
 		resp["status"] = false
@@ -46,19 +46,19 @@ func (con *Loan) Validate() (map[string]interface{}, bool) {
 		return resp, false
 	}
 
-	if con.Arrears == "" {
+	if con.Arrears == 0 {
 		resp["status"] = false
 		resp["message"] = "Arrears is required."
 		return resp, false
 	}
 
-	if con.Tenor == "" {
+	if con.Tenor == 0 {
 		resp["status"] = false
 		resp["message"] = "Tenor is required."
 		return resp, false
 	}
 
-	if con.Interest == "" {
+	if con.Interest == 0 {
 		resp["status"] = false
 		resp["message"] = "Interest is required."
 		return resp, false
@@ -69,7 +69,7 @@ func (con *Loan) Validate() (map[string]interface{}, bool) {
 	return resp, true
 }
 
-func (loan *Loan) Create() (map[string]interface{}) {
+func (loan *Loan) Create() map[string]interface{} {
 
 	resp := make(map[string]interface{})
 	con := &Loan{}
@@ -77,7 +77,7 @@ func (loan *Loan) Create() (map[string]interface{}) {
 	if con.LoanNumber != "" {
 		resp["status"] = false
 		resp["message"] = "This loan number already exists"
-		return resp;
+		return resp
 	}
 
 	GetConn().Create(loan)
@@ -87,9 +87,9 @@ func (loan *Loan) Create() (map[string]interface{}) {
 	return resp
 }
 
-func (loan *Loan) Update(data *Loan) (map[string]interface{}) {
-	
-	resp := make(map[string]interface{})	
+func (loan *Loan) Update(data *Loan) map[string]interface{} {
+
+	resp := make(map[string]interface{})
 
 	GetConn().Model(&loan).Updates(data)
 	resp["status"] = true
@@ -99,7 +99,7 @@ func (loan *Loan) Update(data *Loan) (map[string]interface{}) {
 	return resp
 }
 
-func (loan *Loan) Delete(data *Loan) (map[string]interface{}) {
+func (loan *Loan) Delete(data *Loan) map[string]interface{} {
 
 	resp := make(map[string]interface{})
 

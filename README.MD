@@ -18,26 +18,15 @@ First clone https://github.com/ajengmira/goloan or copy source then go to goloan
 
 ```
 ##go to your db editor
-create database "goloan"
+create database and table
+to execute query lookup .\db\migrations\20210720136960_CreateLoanTable.up
 
 ##go to your console
 cd loan
 
-##go get [-d] [-t] [-u] [-v] [-insecure] [build flags] [packages]
+##go mod tidy for sync package
 
-go get -u github.com/golang/dep/cmd/dep
-go get -u github.com/golang-migrate/migrate
-go get -u github.com/go-sql-driver/mysql
-go get -u github.com/jinzhu/gorm
-go get -u github.com/gorilla/mux
-go get -u github.com/mattes/migrate
-go get -u github.com/joho/godotenv
-
-go build -tags 'mysql' -o install_path github.com/golang-migrate/migrate
-
-go build -tags 'mysql' -o c://go_project/bin/migrate github.com/mattes/migrate/cli
-
-migrate -path ./db/migrations -database mysql://user:password@tcp(host:port)/dbname up
+go mod tidy
 
 go run main.go
 ```
