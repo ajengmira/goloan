@@ -1,11 +1,16 @@
-FROM golang:1.12-alpine
 
-WORKDIR /go/src/goloan
+FROM golang:1.16
 
-COPY *.go .
+WORKDIR /app
 
-RUN go build -o main .
+COPY go.mod ./
+COPY go.sum ./
+RUN go mod download
 
-EXPOSE 8888
+COPY *.go ./
+
+RUN go build -o /docker-gs-ping
+
+EXPOSE 8080
 
 CMD [ "/main" ]

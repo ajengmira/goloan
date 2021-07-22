@@ -1,14 +1,15 @@
 package main
 
 import (
-	_ "goloan/models"
-	"goloan/controllers"
-	"github.com/gorilla/mux"
+	"goloan/app/controllers"
+	_ "goloan/app/models"
 	"net/http"
 
-    //"github.com/go-sql-driver/mysql"
+	"github.com/gorilla/mux"
+	//"github.com/go-sql-driver/mysql"
 )
-func main()  {
+
+func main() {
 
 	router := mux.NewRouter()
 	router.HandleFunc("/api/loans", controllers.GetLoans).Methods("GET")

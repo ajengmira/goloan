@@ -3,7 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
-	"goloan/models"
+	"goloan/app/models"
 	"net/http"
 	"strconv"
 
