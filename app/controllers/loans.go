@@ -133,6 +133,30 @@ var UpdateLoan = func(w http.ResponseWriter, r *http.Request) {
 	w.Write(jsonData)
 }
 
+var ApproveLoan = func(w http.ResponseWriter, r *http.Request) {
+
+	params := mux.Vars(r)
+	id, _ := strconv.ParseUint(params["id"], 10, 32)
+
+	// get the param id
+	mdl := models.GetLoan(uint(id))
+
+	loan := new(models.Loan)
+	loan.Status = 1
+	loans := mdl.Update(loan)
+
+	resp := map[string]interface{}{"status": true, "message": "Request success", "loans": loans}
+	jsonData, err := json.Marshal(resp)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json") // normal header
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonData)
+}
+
 var DeleteLoan = func(w http.ResponseWriter, r *http.Request) {
 
 	params := mux.Vars(r)

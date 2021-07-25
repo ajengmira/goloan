@@ -12,6 +12,7 @@ CREATE TABLE loan (
   arrears  		DOUBLE	NOT NULL,
   tenor  		INT 			NOT NULL,
   interest  	DOUBLE	NOT NULL,
+  status     INT,
   created_at    DATETIME,
   updated_at    DATETIME
 );

@@ -15,6 +15,7 @@ type Loan struct {
 	Arrears     float32 `json:"arrears"`
 	Tenor       uint32  `json:"tenor"`
 	Interest    float32 `json:"interest"`
+	Status    	uint32 	`json:"status"`
 	gorm.Model
 }
 
@@ -79,6 +80,8 @@ func (loan *Loan) Create() map[string]interface{} {
 		resp["message"] = "This loan number already exists"
 		return resp
 	}
+
+	loan.Status = 0
 
 	GetConn().Create(loan)
 	resp["status"] = true
