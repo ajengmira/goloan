@@ -1,8 +1,8 @@
 CREATE DATABASE goloan;
 
-DROP TABLE IF EXISTS loan;
+DROP TABLE IF EXISTS loans;
 
-CREATE TABLE loan (
+CREATE TABLE loans (
   id            INT UNSIGNED	NOT NULL AUTO_INCREMENT PRIMARY KEY,
   loan_number   VARCHAR(150)  NOT NULL,
   ktp_number  	VARCHAR(150)	NOT NULL,
@@ -14,5 +14,6 @@ CREATE TABLE loan (
   interest  	DOUBLE	NOT NULL,
   status     INT,
   created_at    DATETIME,
-  updated_at    DATETIME
+  updated_at    DATETIME,
+  deleted_at    DATETIME
 );

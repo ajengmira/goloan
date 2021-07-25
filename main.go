@@ -6,9 +6,16 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
+	"os"
 )
 
 func main() {
+
+	err1 := godotenv.Load()
+	if err1 != nil {
+		panic(err1)
+	}
 
 	router := mux.NewRouter()
 	router.HandleFunc("/api/loans", controllers.GetLoans).Methods("GET")
@@ -18,7 +25,7 @@ func main() {
 	router.HandleFunc("/api/loan/approve/{id:[0-9]+}", controllers.ApproveLoan).Methods("PUT")
 	router.HandleFunc("/api/loan/{id:[0-9]+}", controllers.DeleteLoan).Methods("DELETE")
 
-	err := http.ListenAndServe("127.0.0.1:9000", router)
+	err := http.ListenAndServe(os.Getenv("app_ip")+":"+os.Getenv("app_port"), router)
 	if err != nil {
 		panic(err)
 	}
