@@ -51,7 +51,7 @@ sudo docker build -t goloan
 ### Create loan
 - Path : `/api/loan`
 - Method: `POST`
-- Fields: `loan_number, debitur_name, phone_number, product_code, arrears, tenor, interest`
+- Fields: `loan_number, ktp_number, debitur_name, phone_number, product_code, arrears, tenor, interest`
 - Response: `200`
 
 ### Details a loan
@@ -62,7 +62,7 @@ sudo docker build -t goloan
 ### Update loan
 - Path : `/api/loan/{id}`
 - Method: `PUT`
-- Fields: `loan_number, debitur_name, phone_number, product_code, arrears, tenor, interest`
+- Fields: `loan_number, ktp_number, debitur_name, phone_number, product_code, arrears, tenor, interest`
 - Response: `200`
 
 ### Approve loan
